@@ -1,0 +1,229 @@
+01/24/2023 17:15:11 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+01/24/2023 17:15:11 PM - INFO - 开始进行消息头和消息内容的分离.
+01/24/2023 17:15:11 PM - INFO - 消息头和消息内容分离耗时: 0.002 s
+01/24/2023 17:15:11 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+01/24/2023 17:15:11 PM - INFO - 开始聚类
+01/24/2023 17:15:11 PM - INFO - 聚类完成，用时 0.0 s
+01/24/2023 17:15:11 PM - INFO - 提取模板成功，共有6个模板，用时: 0.009 s
+01/24/2023 17:15:11 PM - INFO - 开始转换日志
+01/24/2023 17:15:11 PM - INFO - 日志转换完成，用时: 0.0064 s
+01/24/2023 17:15:11 PM - INFO - 映射文件已保存
+01/24/2023 17:15:11 PM - INFO - 日志参数已写入文件.
+01/24/2023 17:15:11 PM - INFO - 模板已保存
+01/24/2023 17:15:11 PM - INFO - 中间文件已压缩，压缩包路径 D:\workspace\PycharmProjects\com\server\logs\zipped\Apache_2k.zip
+01/24/2023 17:15:11 PM - INFO - 压缩比计算完成,为 0.0465
+01/24/2023 17:15:11 PM - INFO - 中间文件已删除.
+03/12/2023 23:33:17 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/12/2023 23:33:17 PM - INFO - 开始进行消息头和消息内容的分离.
+03/12/2023 23:33:17 PM - INFO - 消息头和消息内容分离耗时: 0.003 s
+03/12/2023 23:33:17 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/12/2023 23:33:17 PM - INFO - 开始聚类
+03/12/2023 23:33:17 PM - INFO - 聚类完成，用时 0.002 s
+03/12/2023 23:33:17 PM - INFO - 提取模板成功，共有47个模板，用时: 0.0301 s
+03/12/2023 23:33:17 PM - INFO - 开始转换日志
+03/12/2023 23:33:18 PM - ERROR - Internal Server Error: /compress/start/
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\王思琪\assignment\学习\大创\com\server\views.py", line 92, in compress_log_file
+    compressor.zip(float(request.POST['rate']), float(request.POST['threshold']), int(request.POST['top_n']),
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 221, in zip
+    self.__map(contents, templates)
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 196, in __map
+    result = self.__extract_param(logs, templates)
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 181, in __extract_param
+    extract_result = ptree.match_by_thread(self.prefix_tree, logs)
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\prefix_tree.py", line 181, in match_by_thread
+    return reduce(lambda a, b: a + b, [th.container for th in threads])
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\prefix_tree.py", line 181, in <lambda>
+    return reduce(lambda a, b: a + b, [th.container for th in threads])
+TypeError: can only concatenate list (not "NoneType") to list
+03/12/2023 23:34:00 PM - INFO - 开始进行消息头和消息内容的分离.
+03/12/2023 23:34:00 PM - INFO - 消息头和消息内容分离耗时: 0.0051 s
+03/12/2023 23:34:00 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/12/2023 23:34:00 PM - INFO - 开始聚类
+03/12/2023 23:34:00 PM - ERROR - 聚类发生错误 -> ['[Sun Dec 04 17:20:46 2005] [error] mod_jk child workerEnv in error state 6']
+03/12/2023 23:34:00 PM - ERROR - Internal Server Error: /compress/start/
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\王思琪\assignment\学习\大创\com\server\views.py", line 92, in compress_log_file
+    compressor.zip(float(request.POST['rate']), float(request.POST['threshold']), int(request.POST['top_n']),
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 217, in zip
+    raw_templates = [copy.deepcopy(cl[0]) for cl in self.__cluster(self.__sample(contents, rate), N)]
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 137, in __cluster
+    [self.__cluster_by_rank(cl, i) for cl in clustered])
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 137, in <listcomp>
+    [self.__cluster_by_rank(cl, i) for cl in clustered])
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 108, in __cluster_by_rank
+    raise Exception(f'没有足够数量的token可供按排名{top_N}聚类！')
+Exception: 没有足够数量的token可供按排名2聚类！
+03/12/2023 23:34:17 PM - ERROR - Internal Server Error: /upload/
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\utils\datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'log_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\王思琪\assignment\学习\大创\com\server\views.py", line 32, in get_file
+    log_data = request.FILES['log_file']
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\utils\datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'log_file'
+03/12/2023 23:34:24 PM - INFO - 已获得中间文件，开始复原日志...
+03/12/2023 23:34:24 PM - ERROR - Internal Server Error: /decompress/zipfile/
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\王思琪\assignment\学习\大创\com\server\views.py", line 45, in decompress_zip
+    logzip.decompress(os.path.join('server', 'logs', 'zipped', request.GET['filename']),
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 255, in decompress
+    templates = ptree.get_templates_list(zips_dir)
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\prefix_tree.py", line 206, in get_templates_list
+    with open(os.path.join(template_dir, 'templates.json'), 'r') as templates_json:
+FileNotFoundError: [Errno 2] No such file or directory: 'server\\logs\\decompressed\\zips\\templates.json'
+03/12/2023 23:34:28 PM - INFO - 已获得中间文件，开始复原日志...
+03/12/2023 23:34:28 PM - ERROR - Internal Server Error: /decompress/zipfile/
+Traceback (most recent call last):
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Sophia\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\王思琪\assignment\学习\大创\com\server\views.py", line 45, in decompress_zip
+    logzip.decompress(os.path.join('server', 'logs', 'zipped', request.GET['filename']),
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\logzip.py", line 255, in decompress
+    templates = ptree.get_templates_list(zips_dir)
+  File "F:\王思琪\assignment\学习\大创\com\server\algorithm\prefix_tree.py", line 206, in get_templates_list
+    with open(os.path.join(template_dir, 'templates.json'), 'r') as templates_json:
+FileNotFoundError: [Errno 2] No such file or directory: 'server\\logs\\decompressed\\zips\\templates.json'
+03/14/2023 11:31:51 AM - INFO - 开始进行消息头和消息内容的分离.
+03/14/2023 11:31:51 AM - INFO - 消息头和消息内容分离耗时: 0.0051 s
+03/14/2023 11:31:51 AM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/14/2023 11:31:51 AM - INFO - 开始聚类
+03/14/2023 11:31:51 AM - INFO - 聚类完成，用时 0.002 s
+03/14/2023 11:31:51 AM - INFO - 提取模板成功，共有6个模板，用时: 0.0127 s
+03/14/2023 11:31:51 AM - INFO - 开始转换日志
+03/14/2023 11:31:51 AM - INFO - 日志转换完成，用时: 0.0191 s
+03/14/2023 11:31:51 AM - INFO - 映射文件已保存
+03/14/2023 11:31:51 AM - INFO - 日志参数已写入文件.
+03/14/2023 11:31:51 AM - INFO - 模板已保存
+03/14/2023 11:31:51 AM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\com\server\logs\zipped\Apache_2k.zip
+03/14/2023 11:31:51 AM - INFO - 压缩比计算完成,为 0.0465
+03/14/2023 11:31:51 AM - INFO - 中间文件已删除.
+03/14/2023 13:59:12 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/14/2023 13:59:12 PM - INFO - 开始进行消息头和消息内容的分离.
+03/14/2023 13:59:12 PM - INFO - 消息头和消息内容分离耗时: 0.0064 s
+03/14/2023 13:59:12 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/14/2023 13:59:12 PM - INFO - 开始聚类
+03/14/2023 13:59:12 PM - INFO - 聚类完成，用时 0.0039 s
+03/14/2023 13:59:12 PM - INFO - 提取模板成功，共有6个模板，用时: 0.019 s
+03/14/2023 13:59:12 PM - INFO - 开始转换日志
+03/14/2023 13:59:12 PM - INFO - 日志转换完成，用时: 0.0185 s
+03/14/2023 13:59:12 PM - INFO - 映射文件已保存
+03/14/2023 13:59:12 PM - INFO - 日志参数已写入文件.
+03/14/2023 13:59:12 PM - INFO - 模板已保存
+03/14/2023 13:59:13 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\com\server\logs\zipped\Apache_2k.zip
+03/14/2023 13:59:13 PM - INFO - 压缩比计算完成,为 0.0465
+03/14/2023 13:59:13 PM - INFO - 中间文件已删除.
+03/15/2023 14:13:13 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/15/2023 14:13:13 PM - INFO - 开始进行消息头和消息内容的分离.
+03/15/2023 14:13:13 PM - INFO - 消息头和消息内容分离耗时: 0.0095 s
+03/15/2023 14:13:13 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/15/2023 14:13:13 PM - INFO - 开始聚类
+03/15/2023 14:13:13 PM - INFO - 聚类完成，用时 0.0026 s
+03/15/2023 14:13:13 PM - INFO - 提取模板成功，共有6个模板，用时: 0.012 s
+03/15/2023 14:13:13 PM - INFO - 开始转换日志
+03/15/2023 14:13:13 PM - INFO - 日志转换完成，用时: 0.0143 s
+03/15/2023 14:13:13 PM - INFO - 映射文件已保存
+03/15/2023 14:13:13 PM - INFO - 日志参数已写入文件.
+03/15/2023 14:13:13 PM - INFO - 模板已保存
+03/15/2023 14:13:13 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\com\server\logs\zipped\Apache_2k.zip
+03/15/2023 14:13:13 PM - INFO - 压缩比计算完成,为 0.0465
+03/15/2023 14:13:13 PM - INFO - 中间文件已删除.
+03/21/2023 22:24:35 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/21/2023 22:24:35 PM - INFO - 开始进行消息头和消息内容的分离.
+03/21/2023 22:24:35 PM - INFO - 消息头和消息内容分离耗时: 0.004 s
+03/21/2023 22:24:35 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/21/2023 22:24:35 PM - INFO - 开始聚类
+03/21/2023 22:24:35 PM - INFO - 聚类完成，用时 0.001 s
+03/21/2023 22:24:35 PM - INFO - 提取模板成功，共有6个模板，用时: 0.007 s
+03/21/2023 22:24:35 PM - INFO - 开始转换日志
+03/21/2023 22:24:35 PM - INFO - 日志转换完成，用时: 0.0134 s
+03/21/2023 22:24:35 PM - INFO - 映射文件已保存
+03/21/2023 22:24:35 PM - INFO - 日志参数已写入文件.
+03/21/2023 22:24:35 PM - INFO - 模板已保存
+03/21/2023 22:24:35 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\com\server\logs\zipped\Apache_2k.zip
+03/21/2023 22:24:35 PM - INFO - 压缩比计算完成,为 0.0465
+03/21/2023 22:24:35 PM - INFO - 中间文件已删除.
+03/22/2023 18:14:03 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/22/2023 18:14:03 PM - INFO - 开始进行消息头和消息内容的分离.
+03/22/2023 18:14:03 PM - INFO - 消息头和消息内容分离耗时: 0.005 s
+03/22/2023 18:14:03 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/22/2023 18:14:03 PM - INFO - 开始聚类
+03/22/2023 18:14:03 PM - INFO - 聚类完成，用时 0.001 s
+03/22/2023 18:14:03 PM - INFO - 提取模板成功，共有6个模板，用时: 0.0091 s
+03/22/2023 18:14:03 PM - INFO - 开始转换日志
+03/22/2023 18:14:03 PM - INFO - 日志转换完成，用时: 0.011 s
+03/22/2023 18:14:03 PM - INFO - 映射文件已保存
+03/22/2023 18:14:03 PM - INFO - 日志参数已写入文件.
+03/22/2023 18:14:03 PM - INFO - 模板已保存
+03/22/2023 18:14:03 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\备份\com\server\logs\zipped\Apache_2k.zip
+03/22/2023 18:14:03 PM - INFO - 压缩比计算完成,为 0.0479
+03/22/2023 18:14:03 PM - INFO - 中间文件已删除.
+03/22/2023 19:24:50 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/22/2023 19:24:50 PM - INFO - 开始进行消息头和消息内容的分离.
+03/22/2023 19:24:50 PM - INFO - 消息头和消息内容分离耗时: 0.004 s
+03/22/2023 19:24:50 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/22/2023 19:24:50 PM - INFO - 开始聚类
+03/22/2023 19:24:50 PM - INFO - 聚类完成，用时 0.002 s
+03/22/2023 19:24:50 PM - INFO - 提取模板成功，共有6个模板，用时: 0.013 s
+03/22/2023 19:24:50 PM - INFO - 开始转换日志
+03/22/2023 19:24:50 PM - INFO - 日志转换完成，用时: 0.012 s
+03/22/2023 19:24:50 PM - INFO - 映射文件已保存
+03/22/2023 19:24:50 PM - INFO - 日志参数已写入文件.
+03/22/2023 19:24:50 PM - INFO - 模板已保存
+03/22/2023 19:24:50 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\结项\部署\com\server\logs\zipped\Apache_2k.zip
+03/22/2023 19:24:50 PM - INFO - 压缩比计算完成,为 0.0479
+03/22/2023 19:24:50 PM - INFO - 中间文件已删除.
+03/22/2023 19:31:27 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/22/2023 19:31:27 PM - INFO - 开始进行消息头和消息内容的分离.
+03/22/2023 19:31:27 PM - INFO - 消息头和消息内容分离耗时: 0.002 s
+03/22/2023 19:31:27 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/22/2023 19:31:28 PM - INFO - 开始聚类
+03/22/2023 19:31:28 PM - INFO - 聚类完成，用时 0.001 s
+03/22/2023 19:31:28 PM - INFO - 提取模板成功，共有6个模板，用时: 0.005 s
+03/22/2023 19:31:28 PM - INFO - 开始转换日志
+03/22/2023 19:31:28 PM - INFO - 日志转换完成，用时: 0.0093 s
+03/22/2023 19:31:28 PM - INFO - 映射文件已保存
+03/22/2023 19:31:28 PM - INFO - 日志参数已写入文件.
+03/22/2023 19:31:28 PM - INFO - 模板已保存
+03/22/2023 19:31:28 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\结项\部署\com\server\logs\zipped\Apache_2k.zip
+03/22/2023 19:31:28 PM - INFO - 压缩比计算完成,为 0.0592
+03/22/2023 19:31:28 PM - INFO - 中间文件已删除.
+03/22/2023 19:54:48 PM - INFO - 创建zips文件夹,路径为: server\logs\zipped
+03/22/2023 19:54:48 PM - INFO - 开始进行消息头和消息内容的分离.
+03/22/2023 19:54:48 PM - INFO - 消息头和消息内容分离耗时: 0.0067 s
+03/22/2023 19:54:48 PM - INFO - 已压缩存储消息头,目录为: server\logs\zipped\zips
+03/22/2023 19:54:48 PM - INFO - 开始聚类
+03/22/2023 19:54:48 PM - INFO - 聚类完成，用时 0.001 s
+03/22/2023 19:54:48 PM - INFO - 提取模板成功，共有6个模板，用时: 0.0101 s
+03/22/2023 19:54:48 PM - INFO - 开始转换日志
+03/22/2023 19:54:48 PM - INFO - 日志转换完成，用时: 0.0149 s
+03/22/2023 19:54:48 PM - INFO - 映射文件已保存
+03/22/2023 19:54:48 PM - INFO - 日志参数已写入文件.
+03/22/2023 19:54:48 PM - INFO - 模板已保存
+03/22/2023 19:54:48 PM - INFO - 中间文件已压缩，压缩包路径 F:\王思琪\assignment\学习\大创\结项\部署\com\server\logs\zipped\Apache_2k.zip
+03/22/2023 19:54:48 PM - INFO - 压缩比计算完成,为 0.0592
+03/22/2023 19:54:48 PM - INFO - 中间文件已删除.

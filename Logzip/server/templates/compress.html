@@ -1,0 +1,165 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+    <title>压缩日志</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-compress" style="margin:0;padding: 0;width: 100vw;height: 105vh;
+    background-size: 100% 100%;
+    background: url('../static/image/back.jpg')  fixed ">
+        <div class="container-fluid" style="
+    margin: 0; padding-left: 20vw; padding-top: 6vh;"
+        >
+            <form id="log_form">
+                {% csrf_token %}
+                <button style="text-align: center" class="btn btn-secondary" type="button"
+                        onclick="$('#file_upload').click()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-folder2-open" viewBox="0 0 16 16">
+                        <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z"></path>
+                    </svg>
+                    添加日志文件
+                </button>
+                <input type="file" style="display: none" id="file_upload" name="log_file">
+                <button class="btn btn-primary" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-upload"
+                         viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"></path>
+                    </svg>
+                    上传
+                </button>
+                <text id="file_name" style="color: green;margin-left: 20px"></text>
+            </form>
+        </div>
+
+        <div class="container" style="width: 500px">
+            <form id="param_form">
+                {% csrf_token %}
+                <div class="mb-3 mt-3">
+                    <label for="rate" class="form-label">聚类采样比例:</label>
+                    <input type="number" class="form-control" name="rate" id="rate" placeholder="0 ~ 1" value="0.04"
+                           step="0.01">
+                </div>
+                <div class="mb-3">
+                    <label for="threshold" class="form-label">判定为相同模板的阈值:</label>
+                    <input type="number" class="form-control" name="threshold" id="threshold" placeholder="0 ~ 1"
+                           value="0.6" step="0.05">
+                </div>
+                <div class="mb-3">
+                    <label for="top_n" class="form-label">聚类精细度:</label>
+                    <input type="number" class="form-control" name="top_n" id="top_n" placeholder="整数" value="2">
+                </div>
+                <div class="mb-3">
+                    <label for="delimiter" class="form-label">分隔符:</label>
+                    <input type="text" class="form-control" name="delimiter" id="delimiter" placeholder="还未填写">
+                </div>
+                <div class="mb-3">
+                    <label for="reg" class="form-label">提取日志头部的正则表达式:</label>
+                    <input type="text" class="form-control" name="reg" id="reg" placeholder=".*?">
+                </div>
+            </form>
+        </div>
+
+        <div style="display: flex;justify-content: center;align-content: center">
+            <div style="width: 600px;font-size: small;margin-left: 70px" id="log_demo"></div>
+        </div>
+        <div style="display: flex;justify-content: center;align-content: center;margin-top: 5px">
+            <div style="width: 600px;font-size: small;margin-left: 70px" id="log_result"></div>
+        </div>
+
+        <div style="display: flex;justify-content: center;align-content: center;margin-top: 20px;margin-bottom: 20px">
+            <button class="btn btn-success" id="compress" onclick="$('#param_form').submit();">开始压缩</button>
+            <a id="template" target="_blank">查看模板</a>
+            <a id="download" style="margin-left: 20px">下载压缩包</a>
+        </div>
+        <div style="height: 40px">
+
+        </div>
+
+        <div class="bottom-description" style="width:100%;
+                    background-color: rgba(0, 0, 0, 0.3); margin-bottom: 0;height: 40px;
+position:fixed;z-index:999;bottom:0px;left:0; right:0;">
+            <div class="content" style="color: white;text-align: center;align-content: center;justify-content: center;
+font-size: small;margin-top: 10px">
+                基于机器学习的日志无损压缩系统 | 南开大学软件学院大创项目
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let file_token = ''
+        $(document).ready(function () {
+            $('#template').hide();
+            $('#download').hide();
+            $('#file_upload').change(function () {
+                let fileName = '';
+                if (typeof (fileName) != 'undefined') {
+                    fileName = $('#file_upload').val().split('\\').pop();
+                }
+                file_token = fileName;
+                $('#file_name').text('已选择文件: ' + fileName);
+            })
+            $('#log_form').submit(function (event) {
+                event.preventDefault();
+                let form = $(this);
+                let formData = new FormData(this);
+                formData.append('type', 'log')
+                $.ajax({
+                    type: 'POST',
+                    url: '/upload/',
+                    data: formData,
+                    mimeType: 'multipart/form-data',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (response) {
+                        document.getElementById('log_demo').innerHTML = response;
+                        $('#file_name').text('文件已上传');
+                    }
+                })
+            })
+            $('#param_form').submit(function (event) {
+                event.preventDefault();
+                if (file_token === '') {
+                    alert('还未上传文件!');
+                } else if ($('#rate').val() === 0) {
+                    alert('取样比例未填写!');
+                } else if ($('#threshold').val() === 0) {
+                    alert('阈值未填写!');
+                } else if ($('#top_n').val() === 0) {
+                    alert('聚类精度未填写!');
+                } else if ($('#delimiter').val() === '') {
+                    alert('分隔符未填写!');
+                } else if ($('#reg').val() === '') {
+                    alert('正则表达式还未填写!');
+                } else {
+                    $('#compress').hide();
+                    let form = $(this);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/compress/start/',
+                        data: form.serialize() + '&filename=' + file_token,
+                        success: function (response) {
+                            document.getElementById('log_result').innerHTML = response;
+                            let result_name = file_token.substring(0, file_token.lastIndexOf("."));
+                            $('#download').attr('href', '/compress/download?filename=' + result_name + '.zip').show();
+                            $('#template').attr('href', '/compress/template?filename=' + result_name + '.json').show();
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
+
+
+
+

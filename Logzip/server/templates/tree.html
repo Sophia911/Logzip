@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板前缀树</title>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/jquery.orgchart.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.orgchart.min.js' %}"></script>
+</head>
+<body>
+<div id="jOrgChart"></div>
+<script type='text/javascript'>
+    $.getJSON('{% static 'tree' %}' + "/{{ name }}", function (data) {
+        $('#jOrgChart').orgchart({
+            'data': data,
+            'nodeID': 'id',
+            'nodeTitle': 'token',
+            'zoom': true, //鼠标滑动滚轮，放大缩小
+            'direction': 'l2r', //展示形式，从左到右
+            'parentNodeSymbol': 'font', //展示有子级，去掉则展示默认的
+            'createNode': function ($node, data) {
+                $node.append('<div class="second-menu"></div>');
+            }
+        });
+    })
+</script>
+</body>
+</html>

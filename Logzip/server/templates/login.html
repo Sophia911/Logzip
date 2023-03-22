@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% block title %}
+        <title>登录</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <div class="back" style="margin:0;padding: 0;width: 100%;height: 100vh; background-size: 100% 100% ;
+    background: url('../static/image/background.jpg')  fixed;">
+        <div style=" font-family:STXingkai;font-size: xxx-large;margin-left: 32vw;padding-top: 15vh">
+            欢迎使用日志无损压缩系统
+        </div>
+        <form id="login-form" method="post" style="padding-top: 10vh">
+            {% csrf_token %}
+            <div class="container" style="width: 500px;margin-top: 0;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    {#opacity: 0.8;#}
+                    {#z-index: -1;#}
+                    border-radius: 10px;">
+                <div style="height: 25px"></div>
+                <div class="form-group">
+                    <label for="username" style="font-size: larger; color:white">请输入用户名和密码</label>
+                </div>
+                <div class="form-group" style="margin-top: 25px; ">
+                    <label for="username" style="color:white">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group" style="margin-top: 25px">
+                    <label for="password" style="color:white">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                        style="margin-top: 25px;align-content: center;text-align: center;margin-left: 200px;margin-bottom: 25px">
+                    Login
+                </button>
+            </div>
+        </form>
+        <div class="bottom-description" style="width:100%;
+                    background-color: rgba(0, 0, 0, 0.3); margin-bottom: 0;height: 40px;
+position:fixed;z-index:999;bottom:0px;left:0; right:0;">
+            <div class="content" style="color: white;text-align: center;align-content: center;justify-content: center;
+font-size: small;margin-top: 10px">
+                基于机器学习的日志无损压缩系统 | 南开大学软件学院大创项目
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+{% block scripts %}
+    <script>
+
+        $(document).ready(function () {
+            $('#login-form').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '/login/',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            {#alert('登陆成功！');#}
+                            window.location.href = '/introduce/';
+
+                        } else {
+                            alert('Invalid username or password');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('An error occurred while processing your request.');
+                    }
+                });
+            });
+        });
+
+
+    </script>
+{% endblock %}
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
